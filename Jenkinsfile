@@ -8,7 +8,7 @@ pipeline {
             steps {
                 echo "Hello Java Express"
                 sh 'ls'
-                sh 'docker build -t  bharadwajaws/docker_jenkins_springboot:${BUILD_NUMBER} .'
+                sh 'docker build -t  bharadwajaws/firstrepo'
             }
         }
          stage('Docker Login') {
@@ -16,7 +16,6 @@ pipeline {
         script {
           withCredentials([
             usernamePassword(
-              credentialsId: 'docker-hub-credentials',
               usernameVariable: 'bharadwajaws',
               passwordVariable: 'unzerbrechlichemusik@213'
             )
@@ -29,13 +28,13 @@ pipeline {
       
         stage('Docker Push'){
             steps {
-                sh 'docker push bharadwajaws/docker_jenkins_springboot:${BUILD_NUMBER}'
+                sh 'docker push bharadwajaws/firstrepo'
             }
         }
         stage('Docker deploy'){
             steps {
                
-                sh 'docker run -itd -p  8383:8383 bharadwajaws/docker_jenkins_springboot:${BUILD_NUMBER}'
+                sh 'docker run -itd -p  8383:8383 bharadwajaws/firstrepo'
             }
         }
   }
