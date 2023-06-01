@@ -1,7 +1,9 @@
 pipeline {
   agent any 
 
-stage('Build Docker image'){
+  stages {
+       
+       stage('Build Docker image'){
           
             steps {
                 echo "Hello Java Express"
@@ -28,4 +30,5 @@ stage('Build Docker image'){
                 sh 'docker run -itd -p  8383:8383 bharadwajaws/docker_jenkins_springboot:${BUILD_NUMBER}'
             }
         }
+  }
 }
